@@ -21,18 +21,17 @@ async def pulling():
             if greeting[0] == b'exit': break
             print(str(greeting[0]), file=null)
 
-def main():
-    loop = asyncio.get_event_loop()
+async def main():
+    loop = asyncio.get_running_loop()
     loop.create_task(pushing())
     try:
         begin = time.monotonic()
-        loop.run_until_complete(pulling())
+        await pulling()
         end = time.monotonic()
         print('asyncio + aiozmq: {:.6f} sec.'.format(end - begin))
     except KeyboardInterrupt:
-        loop.stop()
-    loop.close()
+        pass
 
 if __name__ == '__main__':
-    main()
+    asyncio.run(main())
 

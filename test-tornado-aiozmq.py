@@ -6,8 +6,6 @@ from tornado.platform.asyncio import AsyncIOMainLoop
 import time
 import os
 
-AsyncIOMainLoop().install()
-
 async def pushing():
     server = await aiozmq.create_zmq_stream(zmq.PUSH,
                                             bind='tcp://*:9000')
